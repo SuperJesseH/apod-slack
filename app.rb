@@ -19,7 +19,7 @@ configure do
   when :production
     uri = URI.parse(ENV["REDISCLOUD_URL"])
   end
-  
+
   $redis = Redis.new(host: uri.host, port: uri.port, password: uri.password)
   end
 
@@ -29,10 +29,12 @@ end
 
 post "/" do
   response = ""
-  response = { text: send_apod }
-  response[:username] = ENV["BOT_USERNAME"] unless ENV["BOT_USERNAME"].nil?
-  response[:icon_emoji] = ENV["BOT_ICON"] unless ENV["BOT_ICON"].nil?
-  response = response.to_json
+  unless params[:token] != ENV["OUTGOING_WEBHOOK_TOKEN"]
+    response = { text: send_apod }
+    response[:username] = ENV["BOT_USERNAME"] unless ENV["BOT_USERNAME"].nil?
+    response[:icon_emoji] = ENV["BOT_ICON"] unless ENV["BOT_ICON"].nil?
+    response = response.to_json
+  end
 
   status 200
   body response
