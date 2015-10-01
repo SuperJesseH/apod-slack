@@ -1,6 +1,8 @@
 # slack-apod
 Get NASA's Astronomy Picture of the Day in Slack
 
+![example](http://i.imgur.com/fVQAylK.png)
+
 ## What you will need
 * Heroku account
 * Outgoing webhook token for your Slack team
