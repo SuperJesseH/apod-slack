@@ -54,7 +54,7 @@ def generate_attachment
     reply = { title: "#{@title}", image_url: "#{@url}", text: "#{@explanation}" }
 
   else
-    reply = "Error when accessing NASA API"
+    reply = { title: "Error", text: "Error when accessing NASA API" }
   end
   reply
 end
