@@ -30,7 +30,8 @@ end
 post "/" do
   response = ""
   unless params[:token] != ENV["OUTGOING_WEBHOOK_TOKEN"]
-    response = { text: send_apod }
+    response = { text: "Astronomy Picture of the Day" }
+    response[:attachments] = [ generate_attachment ]
     response[:username] = ENV["BOT_USERNAME"] unless ENV["BOT_USERNAME"].nil?
     response[:icon_emoji] = ENV["BOT_ICON"] unless ENV["BOT_ICON"].nil?
     response = response.to_json
@@ -40,7 +41,7 @@ post "/" do
   body response
 end
 
-def send_apod
+def generate_attachment
   reply = ""
   uri = "https://api.nasa.gov/planetary/apod?concept_tags=False&api_key=#{ENV["NASA_API_KEY"]}"
   request = HTTParty.get(uri)
@@ -50,7 +51,8 @@ def send_apod
     @url = response["url"]
     @explanation = response["explanation"]
     @title = response["title"]
-    reply = "#{@url} \n*#{@title}* \n#{@explanation}"
+    reply = { title: "#{@title}", image_url: "#{@url}", text: "#{@explanation}" }
+
   else
     reply = "Error when accessing NASA API"
   end
