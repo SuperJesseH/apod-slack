@@ -1,4 +1,4 @@
-# slack-apod
+# apod-slack
 Get NASA's Astronomy Picture of the Day in Slack
 
 ![example](http://i.imgur.com/fVQAylK.png)
@@ -10,7 +10,7 @@ Get NASA's Astronomy Picture of the Day in Slack
 
 ### Setup
 * Clone this repository locally
-* Create a new Heroku app and follow the instructions to initialize the ```slack-apod``` repository
+* Create a new Heroku app and follow the instructions to initialize the ```apod-slack``` repository
 * Use the [NASA api](https://api.nasa.gov/api.html#authentication) page to generate a developer key
 * Navigate to the settings page of the Heroku app and add the following config variables:
   * ```OUTGOING_WEBHOOK_TOKEN``` The token for your outgoing webhook integration in Slack (more on this in a bit)
